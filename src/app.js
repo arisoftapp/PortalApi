@@ -39,11 +39,7 @@ server.use(function (req, res, next) {
 
 // Rutas
 require ('./routes/log')(server);
-require ('./routes/empresa')(server);
-require ('./routes/especialidad')(server);
-require ('./routes/consultorio')(server);
-require ('./routes/medico')(server);
-require ('./routes/entidad')(server);
+
 
 server.use(function (err, req, res, next) {  //Control de errores
     console.error(err)
@@ -69,7 +65,7 @@ server.use(function (req, res, next) {
     } else {
         // if there is no token
         // return an error
-        return res.status(405).send({
+        return res.status(405).json({
             success: false,
             message: 'No token provided.'
         });
@@ -80,6 +76,11 @@ server.use(function (req, res, next) {
 
 //// Middleware token - Todas las rutas bajo esto estaran protegidas \\\\
 require ('./routes/user')(server);
+require ('./routes/especialidad')(server);
+require ('./routes/consultorio')(server);
+require ('./routes/medico')(server);
+require ('./routes/entidad')(server);
+require ('./routes/paciente')(server);
 
 
 server.listen(server.get('port'), () => {
