@@ -118,7 +118,7 @@ module.exports = function (app) {
             tel_alter : req.body.tel_alter,
             email : req.body.email,
             id_consultorio : req.body.id_consultorio,
-            calle : req.body.calle,
+            calle : req.body.calle ,
             no_ext : req.body.no_ext,
             no_int : req.body.no_int,
             id_edo : req.body.id_edo,
