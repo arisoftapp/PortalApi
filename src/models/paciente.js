@@ -18,9 +18,10 @@ pacienteModel.getPacientes = (callback) => {
 pacienteModel.getPaciente = (id_paciente, callback) => {
     //console.log(idEmpresa);
     if (dbAdmin) {
-        dbAdmin.query(`SELECT paciente.*, b.razon_soc AS fact_razonsoc, b.rfc AS fact_rfc, b.cp AS fact_cp, b.calle AS fact_calle, 
-        b.no_ext AS fact_ext, b.no_int AS fact_int, b.id_edo AS fact_idedo, b.id_mun AS fact_idmun, b.colonia AS fact_colonia, 
-        b.email AS fact_email FROM paciente LEFT JOIN fact_paciente AS b ON paciente.id_paciente = b.id_paciente 
+        dbAdmin.query(`SELECT paciente.*, IFNULL(b.razon_soc, '') AS fact_razonsoc, IFNULL(b.rfc, '') AS fact_rfc, IFNULL(b.cp, '') AS fact_cp, 
+        IFNULL(b.calle, '') AS fact_calle, IFNULL(b.no_ext, '') AS fact_ext, IFNULL(b.no_int, '') AS fact_int, 
+        IFNULL(b.id_edo, '') AS fact_idedo, IFNULL(b.id_mun, '') AS fact_idmun, IFNULL(b.colonia, '') AS fact_colonia, 
+        IFNULL(b.email, '') AS fact_email FROM paciente LEFT JOIN fact_paciente AS b ON paciente.id_paciente = b.id_paciente 
         WHERE paciente.id_paciente = ` + id_paciente, function(err, rows) {
             if (err) {
                 throw err;
@@ -50,6 +51,8 @@ pacienteModel.updatePaciente = (pacienteData, callback) =>{
                 nombre = '${pacienteData.nombre}',
                 ap_paterno = '${pacienteData.ap_paterno}',
                 ap_materno = '${pacienteData.ap_materno}',
+                fecha_nac = '${pacienteData.fecha_nac}',
+                sexo = '${pacienteData.sexo}',
                 RFC = '${pacienteData.RFC}',
                 tel_fijo = '${pacienteData.tel_fijo}',
                 tel_cel = '${pacienteData.tel_cel}',
@@ -58,8 +61,8 @@ pacienteModel.updatePaciente = (pacienteData, callback) =>{
                 calle = '${pacienteData.calle}',
                 no_ext = '${pacienteData.no_ext}',
                 no_int = '${pacienteData.no_int}',
-                id_edo = ${pacienteData.estado_id},
-                id_mun = ${pacienteData.municipio_id},
+                id_edo = ${pacienteData.id_edo},
+                id_mun = ${pacienteData.id_mun},
                 ciudad = '${pacienteData.ciudad}',
                 colonia = '${pacienteData.colonia}'
                 WHERE id_paciente = ${pacienteData.id_paciente}`;
