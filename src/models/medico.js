@@ -27,7 +27,7 @@ medicoModel.getMedico = (id_medico, callback) => {
         INNER JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio
         INNER JOIN entidad_fed AS e ON a.id_estado = e.id_estado
         INNER JOIN municipio AS f ON a.id_municipio = f.id_municipio
-        WHERE a.id_medico = ` + id_medico, function(err, rows) {
+        WHERE a.id_medico =` + id_medico, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -37,6 +37,7 @@ medicoModel.getMedico = (id_medico, callback) => {
         });
     }
 };
+
 
 medicoModel.insertMedico = (medicoData, callback) => {
     if (dbAdmin){
@@ -52,35 +53,40 @@ medicoModel.insertMedico = (medicoData, callback) => {
 
 medicoModel.updateMedico = (medicoData, callback) =>{
     if (dbAdmin){
+        console.log(medicoData)
         const sql = `UPDATE medico SET 
-                nombre = ${medicoData.nombre},
-                ap_paterno = ${medicoData.ap_paterno},
-                ap_materno = ${medicoData.ap_materno},
-                RFC = ${medicoData.RFC},
-                cedula_prof = ${medicoData.cedula_prof},
-                universidad = ${medicoData.universidad},
-                especialidad_1 = ${medicoData.especialidad_1},
-                especialidad_2 = ${medicoData.especialidad_2},
-                tel_fijo = ${medicoData.tel_fijo},
-                tel_cel = ${medicoData.tel_cel},
-                tel_adicional = ${medicoData.tel_adicional},
-                email = ${medicoData.email},
-                id_consultorio = ${medicoData.id_consultorio},
-                calle = ${medicoData.calle},
-                no_ext = ${medicoData.no_ext},
-                no_int = ${medicoData.no_int},
-                estado_id = ${medicoData.estado_id},
-                municipio_id = ${medicoData.municipio_id},
-                ciudad = ${medicoData.ciudad},
-                colonia = ${medicoData.colonia},
-                url_receta = ${medicoData.url_receta},
-                url_solic_analisis = ${medicoData.url_solic_analisis},
-                url_constacia = ${medicoData.url_constacia},
-                url_cert_med = ${medicoData.url_cert_med},
-                url_fact = ${medicoData.url_fact},
-                certificado = ${medicoData.certificado},
-                url_sello = ${medicoData.url_sello},
-                WHERE id_consultorio = ${medicoData.id_medico}`;
+                nombre = '${medicoData.nombre}',
+                ap_paterno = '${medicoData.ap_paterno}',
+                ap_materno = '${medicoData.ap_materno}',
+                RFC = '${medicoData.RFC}',
+                cedula_prof = '${medicoData.cedula_prof}',
+                universidad = '${medicoData.universidad}',
+                especialidad_1 = '${medicoData.especialidad_1}',
+                especialidad_2 = '${medicoData.especialidad_2}',
+                tel_fijo = '${medicoData.tel_fijo}',
+                tel_cel = '${medicoData.tel_cel}',
+                tel_adicional = '${medicoData.tel_adicional}',
+                email = '${medicoData.email}',
+                id_consultorio = '${medicoData.id_consultorio}',
+                calle = '${medicoData.calle}',
+                no_ext = '${medicoData.no_ext}',
+                no_int = '${medicoData.no_int}',
+                enfermedad_cronica = '${medicoData.enfermedad_cronica}',
+                alergias = '${medicoData.alergias}',
+                tipo_sangre = '${medicoData.tipo_sangre}',
+                anotacion = '${medicoData.anotacion}',
+                id_estado = '${medicoData.estado_id}',
+                id_municipio = '${medicoData.municipio_id}',
+                ciudad = '${medicoData.ciudad}',
+                colonia = '${medicoData.colonia}',
+                url_receta = '${medicoData.url_receta}',
+                url_solic_analisis = '${medicoData.url_solic_analisis}',
+                url_constacia = '${medicoData.url_constacia}',
+                url_cert_med = '${medicoData.url_cert_med}',
+                url_fact = '${medicoData.url_fact}',
+                certificado = '${medicoData.certificado}',
+                url_sello = '${medicoData.url_sello}'
+                WHERE id_medico = ${medicoData.id_medico}`;
         dbAdmin.query(sql, function (error, rows){
             if (error) {
                 console.log(error);

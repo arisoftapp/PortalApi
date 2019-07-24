@@ -58,6 +58,11 @@ module.exports = function (app) {
             id_municipio : req.body.municipio_id,
             ciudad : req.body.ciudad,
             colonia : req.body.colonia,
+            tipo_sangre : req.body.tipo_sangre,
+            alergias : req.body.alergias,
+            enfermedad_cronica : req.body.enfermedad_cronica,
+            anotacion :  req.body.anotacion,
+            sexo: req.body.sexo,
             url_receta : req.body.url_receta,
             url_solic_analisis : req.body.url_solic_analisis,
             url_constacia : req.body.url_constacia,
@@ -67,6 +72,7 @@ module.exports = function (app) {
             url_sello : req.body.url_sello
         };
         medico.insertMedico(medicoData, (err, data) => {
+            console.log(data);
             if (err){
                 res.json({
                     success: false,
@@ -104,6 +110,11 @@ module.exports = function (app) {
             municipio_id : req.body.municipio_id,
             ciudad : req.body.ciudad,
             colonia : req.body.colonia,
+            tipo_sangre : req.body.tipo_sangre,
+            alergias : req.body.alergias,
+            enfermedad_cronica : req.body.enfermedad_cronica,
+            anotacion :  req.body.anotacion,
+            sexo: req.body.sexo,
             url_receta : req.body.url_receta,
             url_solic_analisis : req.body.url_solic_analisis,
             url_constacia : req.body.url_constacia,
