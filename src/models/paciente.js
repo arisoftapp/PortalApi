@@ -18,10 +18,13 @@ pacienteModel.getPacientes = (callback) => {
 pacienteModel.getPaciente = (id_paciente, callback) => {
     //console.log(idEmpresa);
     if (dbAdmin) {
-        dbAdmin.query(`SELECT paciente.*, IFNULL(b.razon_soc, '') AS fact_razonsoc, IFNULL(b.rfc, '') AS fact_rfc, IFNULL(b.cp, '') AS fact_cp, 
+        dbAdmin.query(`SELECT paciente.*, e.nombre_estado, f.nombre_municipio, IFNULL(b.razon_soc, '') AS fact_razonsoc, IFNULL(b.rfc, '') AS fact_rfc, IFNULL(b.cp, '') AS fact_cp, 
         IFNULL(b.calle, '') AS fact_calle, IFNULL(b.no_ext, '') AS fact_ext, IFNULL(b.no_int, '') AS fact_int, 
         IFNULL(b.id_edo, '') AS fact_idedo, IFNULL(b.id_mun, '') AS fact_idmun, IFNULL(b.colonia, '') AS fact_colonia, 
-        IFNULL(b.email, '') AS fact_email FROM paciente LEFT JOIN fact_paciente AS b ON paciente.id_paciente = b.id_paciente 
+        IFNULL(b.email, '') AS fact_email FROM paciente as paciente   
+        INNER JOIN entidad_fed AS e ON paciente.id_edo = e.id_estado
+        INNER JOIN municipio AS f ON paciente.id_mun = f.id_municipio 
+        LEFT JOIN fact_paciente AS b ON paciente.id_paciente = b.id_paciente 
         WHERE paciente.id_paciente = ` + id_paciente, function(err, rows) {
             if (err) {
                 throw err;
