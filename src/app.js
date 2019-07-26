@@ -81,6 +81,7 @@ require ('./routes/consultorio')(server);
 require ('./routes/medico')(server);
 require ('./routes/entidad')(server);
 require ('./routes/paciente')(server);
+require ('./routes/citas')(server);
 
 
 server.listen(server.get('port'), () => {
