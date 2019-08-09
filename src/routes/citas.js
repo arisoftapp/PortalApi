@@ -78,4 +78,25 @@ app.post('/citas', (req, res) => {
     });
 });
 
+app.put('/status', (req, res) => {
+    const citaData = {
+        id_cita : req.body.id_cita,
+        status : req.body.status,
+    };
+    cita.updateEstadoCita(citaData, (err, data) => {
+        if (err){
+            res.json({
+                success: false,
+                message: err
+            });
+        }else{
+            res.json({
+                success: true,
+                message: "¡Se Guardaron los cambios exitosamente!"
+            });
+        }
+    });
+});
+
+
 }

@@ -61,4 +61,20 @@ citaModel.insertCita = (citaData, callback) => {
     }
 }
 
+citaModel.updateEstadoCita = (citaData, callback) =>{
+    if (dbAdmin){
+        const sql = `UPDATE citas SET 
+                status = '${citaData.status}'
+                WHERE id_cita = ${citaData.id_cita}`;
+        dbAdmin.query(sql, function (error, rows){
+            if (error) {
+                console.log(error);
+                //callback(null,err.message)
+            } else {                  
+                callback(null, rows);
+            }
+        });
+    }
+}
+
 module.exports = citaModel;

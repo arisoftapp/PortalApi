@@ -84,6 +84,28 @@ require ('./routes/paciente')(server);
 require ('./routes/citas')(server);
 
 
-server.listen(server.get('port'), () => {
+
+const Server = server.listen(server.get('port'), () => {
     console.log("MedicalWebService in the port 3005");
 });
+
+//CHAT
+const SocketIO = require('socket.io');
+const io = SocketIO(Server);
+
+io.on("connection", socket => {
+    //MENSAJE, CUANDO UN USUARIO SE A CONECTADO
+    console.log("user connected");
+    
+    //MENSAJE CUADO SE DESCONECTA UN USUARIO
+    socket.on("disconnect", function() {
+      console.log("user disconnected");
+    });
+   
+    //EMISION DE MENSAJES
+    socket.on("message", message => {
+      console.log("Message Received: " + message);
+      socket.broadcast.emit("message", {id_recptor: message.id_receptor, id:message.id, emisor: message.emisor, mensaje: message.mensaje , receptor: message.receptor});
+    });
+  });
+
