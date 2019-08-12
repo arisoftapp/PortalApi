@@ -6,7 +6,7 @@ medicoModel.getMedicos = (callback) => {
     if (dbAdmin) {
         dbAdmin.query(`SELECT a.*, d.nombre_consultorio
         FROM medico AS a
-        INNER JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio`, function(err, rows) {
+        LEFT JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio`, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -71,6 +71,7 @@ medicoModel.updateMedico = (medicoData, callback) =>{
                 calle = '${medicoData.calle}',
                 no_ext = '${medicoData.no_ext}',
                 no_int = '${medicoData.no_int}',
+                sexo ='${medicoData.sexo}',
                 enfermedad_cronica = '${medicoData.enfermedad_cronica}',
                 alergias = '${medicoData.alergias}',
                 tipo_sangre = '${medicoData.tipo_sangre}',
