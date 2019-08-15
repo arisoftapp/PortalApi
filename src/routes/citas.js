@@ -52,12 +52,12 @@ app.get('/tipo', (req, res) => {
 
 app.post('/citas', (req, res) => {
     const citaData = {
-        id_cita : req.body.id_cita,
         id_paciente: req.body.id_paciente,
         id_medico:  req.body.id_medico,
         id_prioridad:   req.body.id_prioridad,
         id_tipo:   req.body.id_tipo,
         hora:   req.body.hora,
+        hora_f: req.body.hora_f,
         fecha:  req.body.fecha,
         sintomas:   req.body.sintomas,
         status: req.body.status

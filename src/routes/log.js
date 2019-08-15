@@ -40,6 +40,7 @@ module.exports = function (app) {
                                             username = data[0].username;
                                             name = data[0].name; 
                                             id_medico = data[0].id_medico;
+                                            permisos = data[0].permisos
                                             if (pass != req.body.Password) {
                                                 res.json({ 
                                                     success: false,
@@ -63,6 +64,7 @@ module.exports = function (app) {
                                                     expiresIn: expiraEn,
                                                     token: token,
                                                     id: id_medico,
+                                                    permisos
                                                 });
                                             }
                                         }
