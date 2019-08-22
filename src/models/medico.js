@@ -22,12 +22,12 @@ medicoModel.getMedico = (id_medico, callback) => {
     if (dbAdmin) {
         dbAdmin.query(`SELECT a.*, b.nombre_especialidad AS nombre_esp_1, c.nombre_especialidad AS nombre_esp_2, d.nombre_consultorio, e.nombre_estado, f.nombre_municipio
         FROM medico AS a
-        INNER JOIN especialidad AS b ON a.especialidad_1 = b.id_especialidad
-        INNER JOIN especialidad AS c ON a.especialidad_2 = c.id_especialidad
-        INNER JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio
-        INNER JOIN entidad_fed AS e ON a.id_estado = e.id_estado
-        INNER JOIN municipio AS f ON a.id_municipio = f.id_municipio
-        WHERE a.id_medico =` + id_medico, function(err, rows) {
+        LEFT JOIN especialidad AS b ON a.especialidad_1 = b.id_especialidad
+        LEFT JOIN especialidad AS c ON a.especialidad_2 = c.id_especialidad
+        LEFT JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio
+        LEFT JOIN entidad_fed AS e ON a.id_estado = e.id_estado
+        LEFT JOIN municipio AS f ON a.id_municipio = f.id_municipio
+        WHERE a.id_medico = ` + id_medico, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -80,6 +80,9 @@ medicoModel.updateMedico = (medicoData, callback) =>{
                 id_municipio = '${medicoData.municipio_id}',
                 ciudad = '${medicoData.ciudad}',
                 colonia = '${medicoData.colonia}',
+                permisos = '${medicoData.permisos}',
+                password = '${medicoData.password}',
+                username = '${medicoData.username}',
                 url_receta = '${medicoData.url_receta}',
                 url_solic_analisis = '${medicoData.url_solic_analisis}',
                 url_constacia = '${medicoData.url_constacia}',

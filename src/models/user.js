@@ -48,7 +48,7 @@ userModel.getUserByAdminUsername = (username, callback) => {
 
 userModel.getUserByAsistantUsername = (username, callback) => {
     if (dbAdmin) {
-        dbAdmin.query(`SELECT username, password, CONCAT(nombre,  ' ', ap_paterno) AS name FROM asistente WHERE username = ?`, [username], function(err, row) {
+        dbAdmin.query(`SELECT username, password, id_asistente, permisos, CONCAT(nombre,  ' ', ap_paterno) AS name FROM asistente WHERE username = ?`, [username], function(err, row) {
             if (err) {
                 throw err;
             }

@@ -72,9 +72,12 @@ module.exports = function (app) {
                                 });
                             } else {
                                 puesto = "Asistente";
+                                console.log(data[0]);
                                 pass = data[0].password;
                                 username = data[0].password;
                                 name = data[0].name; 
+                                id = data[0].id_asistente;
+                                permisos = data[0].permisos;
                                 if (pass != req.body.Password) {
                                     res.json({ 
                                         success: false,
@@ -97,6 +100,8 @@ module.exports = function (app) {
                                         username: name,
                                         expiresIn: expiraEn,
                                         token: token,
+                                        id: id,
+                                        permisos: permisos
                                     });
                                 }
                             }

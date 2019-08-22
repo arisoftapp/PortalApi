@@ -82,7 +82,7 @@ require ('./routes/medico')(server);
 require ('./routes/entidad')(server);
 require ('./routes/paciente')(server);
 require ('./routes/citas')(server);
-
+require ('./routes/asistente')(server);
 
 
 const Server = server.listen(server.get('port'), () => {

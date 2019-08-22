@@ -63,6 +63,7 @@ module.exports = function (app) {
             enfermedad_cronica : req.body.enfermedad_cronica,
             anotacion :  req.body.anotacion,
             sexo: req.body.sexo,
+            permisos: req.body.permisos,
             url_receta : req.body.url_receta,
             url_solic_analisis : req.body.url_solic_analisis,
             url_constacia : req.body.url_constacia,
@@ -88,6 +89,7 @@ module.exports = function (app) {
     });
 
     app.put('/medico', (req, res) => {
+        console.log(req.body)
         const medicoData = {
             id_medico : req.body.id_medico,
             nombre : req.body.nombre,
@@ -115,6 +117,9 @@ module.exports = function (app) {
             enfermedad_cronica : req.body.enfermedad_cronica,
             anotacion :  req.body.anotacion,
             sexo: req.body.sexo,
+            permisos: req.body.permisos,
+            username: req.body.username,
+            password: req.body.password,
             url_receta : req.body.url_receta,
             url_solic_analisis : req.body.url_solic_analisis,
             url_constacia : req.body.url_constacia,
