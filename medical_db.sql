@@ -11,11 +11,30 @@
  Target Server Version : 100316
  File Encoding         : 65001
 
- Date: 12/08/2019 10:03:49
+ Date: 22/08/2019 12:57:18
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for asis_medico
+-- ----------------------------
+DROP TABLE IF EXISTS `asis_medico`;
+CREATE TABLE `asis_medico`  (
+  `id_asistente` int(10) NOT NULL,
+  `id_medico` int(10) NOT NULL,
+  PRIMARY KEY (`id_asistente`, `id_medico`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of asis_medico
+-- ----------------------------
+INSERT INTO `asis_medico` VALUES (1, 1);
+INSERT INTO `asis_medico` VALUES (1, 2);
+INSERT INTO `asis_medico` VALUES (1, 5);
+INSERT INTO `asis_medico` VALUES (2, 1);
+INSERT INTO `asis_medico` VALUES (2, 10);
 
 -- ----------------------------
 -- Table structure for asistente
@@ -29,18 +48,21 @@ CREATE TABLE `asistente`  (
   `ap_paterno` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `ap_materno` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `calle` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `no_ext` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `no_ext` varchar(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `no_int` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `colonia` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `telefono` int(10) NULL DEFAULT NULL,
+  `colonia` varchar(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `telefono` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tel_add` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `permisos` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_asistente`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of asistente
 -- ----------------------------
-INSERT INTO `asistente` VALUES (1, 'asis', 'asis', 'Carmen', 'Romero', 'Verdugo', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `asistente` VALUES (1, 'asis', 'asis', 'Carmen', 'Romero', 'Verdugo', 'Prados', '2066', 'null', 'jardines del bosque', '2147483647', '6681245872', '1,1,1,1,0,0,0,1,0,0');
+INSERT INTO `asistente` VALUES (2, 'asis2', 'asis', 'Evelyn Guadalupe', 'Castro', 'Galaviz', 'Zapotillo', '2515', '', 'Zapotillo 1', '6684258696', '6666666666', '0,0,0,0,0,0,0,0,0,0');
+INSERT INTO `asistente` VALUES (4, NULL, NULL, 'Juan Manuel', 'Rocha ', 'Chavez', 'de la soledad', '568', NULL, 'amargura', '6684628456', '6682463135', NULL);
 
 -- ----------------------------
 -- Table structure for citas
@@ -54,23 +76,31 @@ CREATE TABLE `citas`  (
   `id_tipo` int(10) NULL DEFAULT NULL,
   `fecha` date NULL DEFAULT NULL,
   `hora` varchar(6) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `hora_f` varchar(6) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `duracion` int(4) NULL DEFAULT NULL,
   `sintomas` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` int(5) NULL DEFAULT NULL,
   PRIMARY KEY (`id_cita`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of citas
 -- ----------------------------
-INSERT INTO `citas` VALUES (1, 5, 9, 2, 1, '2019-07-26', '10:30', 'dolor abdominal', 1);
-INSERT INTO `citas` VALUES (2, 4, 10, 2, 1, '2019-07-30', '10:00', 'le apesta la boca', 1);
-INSERT INTO `citas` VALUES (3, 5, 11, 1, 5, '2019-07-31', '11:30', 'la persona presenta perdida auditiva en el oido izquierdo por lo que debe hacerse un analisis y revicion para descartar que exista cualquier anomalia en su canal auditivo', 1);
-INSERT INTO `citas` VALUES (4, 3, 1, 1, 1, '2019-07-29', '11:30', 'sintomas', 2);
-INSERT INTO `citas` VALUES (5, 5, 1, 1, 4, '2019-07-29', '11:00', 'comezón ', 1);
-INSERT INTO `citas` VALUES (6, 1, 10, 1, 5, '2019-07-31', '09:30', 'dolor en el oído ', 1);
-INSERT INTO `citas` VALUES (7, 2, 11, 3, 1, '2019-08-07', '12:30', 'no lo se', 1);
-INSERT INTO `citas` VALUES (8, 5, 9, 3, 3, '2019-08-06', '10:00', 'le pica una muela\n', 2);
-INSERT INTO `citas` VALUES (9, 1, 1, 1, 1, '2019-08-05', '09:00', 'dolor de estomago\n', 1);
+INSERT INTO `citas` VALUES (1, 5, 9, 2, 1, '2019-07-26', '10:30', '11:03', 30, 'tivia perone', 1);
+INSERT INTO `citas` VALUES (2, 4, 10, 2, 1, '2019-07-30', '10:00', '11:03', 30, 'le apesta la boca', 1);
+INSERT INTO `citas` VALUES (3, 5, 11, 1, 5, '2019-07-31', '11:30', '12:03', 30, 'la persona presenta perdida auditiva en el oido izquierdo por lo que debe hacerse un analisis y revicion para descartar que exista cualquier anomalia en su canal auditivo', 1);
+INSERT INTO `citas` VALUES (4, 3, 1, 1, 1, '2019-07-29', '11:30', '12:03', 30, 'sintomas', 2);
+INSERT INTO `citas` VALUES (5, 5, 1, 1, 4, '2019-07-29', '11:00', '11:03', 30, 'comezón ', 1);
+INSERT INTO `citas` VALUES (6, 1, 10, 1, 5, '2019-07-31', '09:30', '11:03', 30, 'dolor en el oído ', 1);
+INSERT INTO `citas` VALUES (7, 2, 11, 3, 1, '2019-08-07', '12:30', '13:03', 30, 'no lo se', 1);
+INSERT INTO `citas` VALUES (8, 5, 9, 3, 3, '2019-08-06', '10:00', '11:03', 30, 'le pica una muela\n', 2);
+INSERT INTO `citas` VALUES (9, 1, 1, 1, 1, '2019-08-05', '09:00', '11:03', 30, 'dolor de estomago\n', 1);
+INSERT INTO `citas` VALUES (10, 5, 9, 3, 1, '2019-08-15', '10:33', '11:03', 30, 'hambre', 1);
+INSERT INTO `citas` VALUES (14, 5, 9, 3, 1, '2019-08-15', '05:05', '05:35', NULL, 'hambre', 1);
+INSERT INTO `citas` VALUES (16, 5, 9, 3, 1, '2019-08-14', '06:30', '07:00', NULL, 'hambre', 1);
+INSERT INTO `citas` VALUES (17, 4, 8, 4, 1, '2019-08-22', '02:24', '02:54', NULL, 'no hay', 1);
+INSERT INTO `citas` VALUES (18, 5, 1, 2, 1, '2019-08-22', '05:04', '05:34', NULL, 'no hay', 1);
+INSERT INTO `citas` VALUES (19, 2, 2, 3, 1, '2019-08-23', '06:02', '06:33', NULL, 'sda', 1);
 
 -- ----------------------------
 -- Table structure for consultorio
@@ -172,21 +202,21 @@ CREATE TABLE `especialidad`  (
   `id_especialidad` int(10) NOT NULL AUTO_INCREMENT,
   `nombre_especialidad` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   PRIMARY KEY (`id_especialidad`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of especialidad
 -- ----------------------------
 INSERT INTO `especialidad` VALUES (1, 'General');
 INSERT INTO `especialidad` VALUES (2, 'Medicina Interna');
-INSERT INTO `especialidad` VALUES (4, 'Ginecología');
-INSERT INTO `especialidad` VALUES (5, 'Traumatología');
-INSERT INTO `especialidad` VALUES (8, 'Neurología');
-INSERT INTO `especialidad` VALUES (9, 'Terapia Física y Rehabilitación');
-INSERT INTO `especialidad` VALUES (10, 'Oncología');
-INSERT INTO `especialidad` VALUES (15, 'Pediatría');
-INSERT INTO `especialidad` VALUES (16, 'Angiología');
-INSERT INTO `especialidad` VALUES (17, ' Cirugía Plástica ');
+INSERT INTO `especialidad` VALUES (3, 'Ginecología');
+INSERT INTO `especialidad` VALUES (4, 'Traumatología');
+INSERT INTO `especialidad` VALUES (5, 'Neurología');
+INSERT INTO `especialidad` VALUES (6, 'Terapia Física y Rehabilitación');
+INSERT INTO `especialidad` VALUES (7, 'Oncología');
+INSERT INTO `especialidad` VALUES (8, 'Pediatría');
+INSERT INTO `especialidad` VALUES (9, 'Angiología');
+INSERT INTO `especialidad` VALUES (10, ' Cirugía Plástica ');
 
 -- ----------------------------
 -- Table structure for estatus_cita
@@ -255,7 +285,7 @@ CREATE TABLE `medico`  (
   `nombre` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `ap_paterno` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `ap_materno` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
-  `sexo` int(1) NOT NULL DEFAULT 0,
+  `sexo` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0',
   `fecha_nac` date NULL DEFAULT NULL,
   `RFC` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `cedula_prof` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
@@ -285,20 +315,21 @@ CREATE TABLE `medico`  (
   `alergias` varchar(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `enfermedad_cronica` varchar(300) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `anotacion` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
+  `permisos` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_medico`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of medico
 -- ----------------------------
-INSERT INTO `medico` VALUES (1, 'medico', 'medico', 'Joaquín', 'Cervantes', 'Díaz', 1, '1970-07-16', '', '85214700', 'Universidad Autónoma de Sinaloa', 4, 8, '9901136', '6691113926', '', 'j.cervantes@miclinica.com', 0, 'Av. Insurgentes', '1596', '0', 25, 1878, 'Mazatlán', 'La Marina', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'A+', 'ninguna', 'Gastritis', '');
-INSERT INTO `medico` VALUES (4, '', '', 'Janeth', 'Sosa', 'Guevara', 2, '1980-12-07', '', '85221477', '', 4, 9, '', '', '', '', 1, '', '', '', 25, 1878, '', '', '', '', '', '', '', '', '', 'null', '', '', '');
-INSERT INTO `medico` VALUES (5, 'med2', 'medico', 'Edgar Rafael', 'Rembao', 'Quintero', 1, '1997-01-08', '', '25', 'UAS', 4, 5, '6681241186', '6681241186', '6681241186', 'edgarembao18@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los Mochis', 'jardines del bosque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OHR+', 'niguna', 'ninguna', 'ahorita no joven');
-INSERT INTO `medico` VALUES (9, 'med3', 'medico', 'Elizabeth', 'Gaxiola', 'Carrillo', 2, '2019-07-21', '', '20', 'UAS', 1, 2, '6681265843', '6684568569', '6684568568', 'Elyzabet@hotmail.com', 0, 'Tortugas', '1230', '', 25, 1878, 'Tortugas 1', 'Las tortugas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ninguna', 'ninguna', NULL);
-INSERT INTO `medico` VALUES (10, '', '', 'Kevin', 'Vazquez', 'Niebla', 1, '1997-03-01', '', '25366946', 'UAS', 1, 2, '6681256341', '6681693214', '6681996633', 'Kevin@hotmail.com', 0, 'Centenario', '3334', '', 25, 1878, 'Los Mochis', 'Nuevo Horizonte', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'polvo', 'feo', 'no sirve para nada pero es buen compa');
-INSERT INTO `medico` VALUES (11, 'med4', 'medico', 'Eduardo', 'Cota', 'Cota', 1, '1997-12-12', '', '20', 'UNIVERSIDAD AUTONOMA DE SINALO', 2, 1, '6682456896', '6682456896', '', 'Lalocota@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los mochis', 'Teresita', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'las mujeres', 'ser feo', 'medio mamon');
-INSERT INTO `medico` VALUES (12, '', '', 'Ignacio', 'Sanchez', 'Mundo', 1, '1998-07-09', '', '66896854', 'UAS', 2, 4, '6684596958', '6687589632', '', 'nachitop@hotmail.co', 0, 'Prados', '2545', '', 25, 1878, 'Los Mochis', 'El Parque', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'A-', 'ninguna', 'ninguna', 'ninguna');
-INSERT INTO `medico` VALUES (13, '', '', 'Grace', 'Valenzuela', 'Camaccho', 2, '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 25, 1878, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN');
+INSERT INTO `medico` VALUES (1, 'medico', 'medico', 'Joaquín', 'Cervantes', 'Díaz', '1', '1970-07-16', '', '85214700', 'Universidad Autónoma de Sinaloa', 4, 3, '9901136', '6691113926', '', 'j.cervantes@miclinica.com', 0, 'Av. Insurgentes', '1596', '0', 0, 0, 'Mazatlán', 'La Marina', '', '', '', '', '', '', '', 'A+', 'ninguna', 'Gastritis', 'anotacion', '1,1,1,1,1,1,1,1,1,1');
+INSERT INTO `medico` VALUES (2, '', '', 'Grace', 'Valenzuela', 'Camaccho', '2', '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 0, 0, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (4, '', '', 'Janeth', 'Sosa', 'Guevara', '2', '1980-12-07', '', '85221477', '', 4, 3, '', '', '', '', 1, '', '', '', 25, 1878, '', '', '', '', '', '', '', '', '', 'null', '', '', '', '1,1,1,1,0,1,0,1,0,1');
+INSERT INTO `medico` VALUES (5, 'med2', 'medico', 'Edgar Rafael', 'Rembao', 'Quintero', '1', '1997-01-08', '', '25', 'UAS', 4, 5, '6681241186', '6681241186', '6681241186', 'edgarembao18@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los Mochis', 'jardines del bosque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OHR+', 'niguna', 'ninguna', 'ahorita no joven', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (6, 'kevin', 'medico', 'Kevin', 'Vazquez', 'Niebla', '2', '1997-03-01', '', '25366946', 'UAS', 1, 2, '6681256341', '6681693214', '6681996633', 'Kevin@hotmail.com', 0, 'Centenario', '3334', '', 0, 0, 'Los Mochis', 'Nuevo Horizonte', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'polvo', 'feo', 'no sirve para nada pero es buen compa', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (7, 'med4', 'medico', 'Eduardo', 'Cota', 'Cota', '1', '1997-12-12', '', '20', 'UNIVERSIDAD AUTONOMA DE SINALO', 2, 1, '6682456896', '6682456896', '', 'Lalocota@hotmail.com', 0, 'lluevia de plata', '2066', '', 0, 0, 'Los mochis', 'Teresita', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'las mujeres', 'ser feo', 'medio mamon', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (8, '', '', 'Ignacio', 'Sanchez', 'Mundo', '1', '1998-07-09', '', '66896854', 'UAS', 2, 4, '6684596958', '6687589632', '', 'nachitop@hotmail.co', 0, 'Prados', '2545', '', 25, 1878, 'Los Mochis', 'El Parque', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'A-', 'ninguna', 'ninguna', 'ninguna', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (9, 'med3', 'medico', 'Elizabeth', 'Gaxiola', 'Carrillo', '2', '2019-07-21', '', '20', 'UAS', 1, 2, '6681265843', '6684568569', '6684568568', 'Elyzabet@hotmail.com', 0, 'Tortugas', '1230', '', 25, 1878, 'Tortugas 1', 'Las tortugas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ninguna', 'ninguna', NULL, '1,1,1,1,1,1,0,1,1,1');
 
 -- ----------------------------
 -- Table structure for municipio
