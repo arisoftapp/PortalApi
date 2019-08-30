@@ -46,8 +46,8 @@ asistenteModel.getAsisMedico = (id_asistente, callback) => {
 };
 
 
-asistenteModel.insertAsistente = (asistenteData, callback) => {
-    if (dbAdmin){
+asistenteModel.insertAsistente = (asistenteData, asignar,  callback) => {
+   if (dbAdmin){
         dbAdmin.query(`INSERT INTO asistente SET ? `, asistenteData, (error, rows) => {
             if (error) {
                 console.log(error);
@@ -55,7 +55,28 @@ asistenteModel.insertAsistente = (asistenteData, callback) => {
                 callback(null, rows);
             }
         });
-    }
+        dbAdmin.query('SELECT MAX(id_asistente) as id FROM asistente', (error, rows, fields) => {
+            if (error) {
+                console.log(error);
+            } else {  
+               
+                console.log(rows[0].id);
+                for(let item of asignar) {
+                    console.log(item);
+                    
+                    const asignarData = {
+                        id_asistente: rows[0].id,
+                        id_medico :item.id_medic };
+                    dbAdmin.query(`INSERT INTO asis_medico SET ? `, asignarData, (error, rows) => {
+                        if (error) {
+                            console.log(error);
+                        } else {                  
+                        }
+                    });
+                }   
+            }
+        });
+   }
 }
 
 asistenteModel.updateAsistente = (asistenteData, callback) =>{

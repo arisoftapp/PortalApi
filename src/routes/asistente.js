@@ -63,10 +63,10 @@ module.exports = function (app) {
             colonia : req.body.colonia,
             telefono : req.body.telefono,
             tel_add : req.body.tel_add,
-            permisos : req.body.permisos,
-           
+            permisos : req.body.permisos,  
         };
-        asistente.insertAsistente(asistenteData, (err, data) => {
+        const asignar = req.body.asignar
+        asistente.insertAsistente(asistenteData, asignar, (err, data) => {
             console.log(data);
             if (err){
                 res.json({
