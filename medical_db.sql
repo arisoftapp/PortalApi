@@ -11,7 +11,7 @@
  Target Server Version : 100316
  File Encoding         : 65001
 
- Date: 22/08/2019 12:57:18
+ Date: 30/08/2019 11:41:05
 */
 
 SET NAMES utf8mb4;
@@ -33,8 +33,9 @@ CREATE TABLE `asis_medico`  (
 INSERT INTO `asis_medico` VALUES (1, 1);
 INSERT INTO `asis_medico` VALUES (1, 2);
 INSERT INTO `asis_medico` VALUES (1, 5);
+INSERT INTO `asis_medico` VALUES (1, 9);
 INSERT INTO `asis_medico` VALUES (2, 1);
-INSERT INTO `asis_medico` VALUES (2, 10);
+INSERT INTO `asis_medico` VALUES (2, 8);
 
 -- ----------------------------
 -- Table structure for asistente
@@ -61,8 +62,8 @@ CREATE TABLE `asistente`  (
 -- Records of asistente
 -- ----------------------------
 INSERT INTO `asistente` VALUES (1, 'asis', 'asis', 'Carmen', 'Romero', 'Verdugo', 'Prados', '2066', 'null', 'jardines del bosque', '2147483647', '6681245872', '1,1,1,1,0,0,0,1,0,0');
-INSERT INTO `asistente` VALUES (2, 'asis2', 'asis', 'Evelyn Guadalupe', 'Castro', 'Galaviz', 'Zapotillo', '2515', '', 'Zapotillo 1', '6684258696', '6666666666', '0,0,0,0,0,0,0,0,0,0');
-INSERT INTO `asistente` VALUES (4, NULL, NULL, 'Juan Manuel', 'Rocha ', 'Chavez', 'de la soledad', '568', NULL, 'amargura', '6684628456', '6682463135', NULL);
+INSERT INTO `asistente` VALUES (2, 'asis2', 'asis', 'Evelyn Guadalupe', 'Castro', 'Galaviz', 'Zapotillo', '2515', '', 'Zapotillo 1', '6684258696', '6666666666', '1,1,1,0,0,0,0,1,0');
+INSERT INTO `asistente` VALUES (4, '', '', 'Juan Manuel', 'Rocha ', 'Chavez', 'de la soledad', '568', 'null', 'amargura', '6684628456', '6682463135', '1,1,1,0,0,0,0,1,0');
 
 -- ----------------------------
 -- Table structure for citas
@@ -81,7 +82,7 @@ CREATE TABLE `citas`  (
   `sintomas` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` int(5) NULL DEFAULT NULL,
   PRIMARY KEY (`id_cita`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of citas
@@ -101,6 +102,7 @@ INSERT INTO `citas` VALUES (16, 5, 9, 3, 1, '2019-08-14', '06:30', '07:00', NULL
 INSERT INTO `citas` VALUES (17, 4, 8, 4, 1, '2019-08-22', '02:24', '02:54', NULL, 'no hay', 1);
 INSERT INTO `citas` VALUES (18, 5, 1, 2, 1, '2019-08-22', '05:04', '05:34', NULL, 'no hay', 1);
 INSERT INTO `citas` VALUES (19, 2, 2, 3, 1, '2019-08-23', '06:02', '06:33', NULL, 'sda', 1);
+INSERT INTO `citas` VALUES (20, 1, 1, 1, 1, '2019-08-27', '10:05', '10:35', NULL, 'ninguno viene por gusto', 1);
 
 -- ----------------------------
 -- Table structure for consultorio
@@ -323,13 +325,13 @@ CREATE TABLE `medico`  (
 -- Records of medico
 -- ----------------------------
 INSERT INTO `medico` VALUES (1, 'medico', 'medico', 'Joaquín', 'Cervantes', 'Díaz', '1', '1970-07-16', '', '85214700', 'Universidad Autónoma de Sinaloa', 4, 3, '9901136', '6691113926', '', 'j.cervantes@miclinica.com', 0, 'Av. Insurgentes', '1596', '0', 0, 0, 'Mazatlán', 'La Marina', '', '', '', '', '', '', '', 'A+', 'ninguna', 'Gastritis', 'anotacion', '1,1,1,1,1,1,1,1,1,1');
-INSERT INTO `medico` VALUES (2, '', '', 'Grace', 'Valenzuela', 'Camaccho', '2', '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 0, 0, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN', '1,1,1,1,1,1,0,1,1,1');
-INSERT INTO `medico` VALUES (4, '', '', 'Janeth', 'Sosa', 'Guevara', '2', '1980-12-07', '', '85221477', '', 4, 3, '', '', '', '', 1, '', '', '', 25, 1878, '', '', '', '', '', '', '', '', '', 'null', '', '', '', '1,1,1,1,0,1,0,1,0,1');
-INSERT INTO `medico` VALUES (5, 'med2', 'medico', 'Edgar Rafael', 'Rembao', 'Quintero', '1', '1997-01-08', '', '25', 'UAS', 4, 5, '6681241186', '6681241186', '6681241186', 'edgarembao18@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los Mochis', 'jardines del bosque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OHR+', 'niguna', 'ninguna', 'ahorita no joven', '1,1,1,1,1,1,0,1,1,1');
-INSERT INTO `medico` VALUES (6, 'kevin', 'medico', 'Kevin', 'Vazquez', 'Niebla', '2', '1997-03-01', '', '25366946', 'UAS', 1, 2, '6681256341', '6681693214', '6681996633', 'Kevin@hotmail.com', 0, 'Centenario', '3334', '', 0, 0, 'Los Mochis', 'Nuevo Horizonte', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'polvo', 'feo', 'no sirve para nada pero es buen compa', '1,1,1,1,1,1,0,1,1,1');
-INSERT INTO `medico` VALUES (7, 'med4', 'medico', 'Eduardo', 'Cota', 'Cota', '1', '1997-12-12', '', '20', 'UNIVERSIDAD AUTONOMA DE SINALO', 2, 1, '6682456896', '6682456896', '', 'Lalocota@hotmail.com', 0, 'lluevia de plata', '2066', '', 0, 0, 'Los mochis', 'Teresita', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'las mujeres', 'ser feo', 'medio mamon', '1,1,1,1,1,1,0,1,1,1');
-INSERT INTO `medico` VALUES (8, '', '', 'Ignacio', 'Sanchez', 'Mundo', '1', '1998-07-09', '', '66896854', 'UAS', 2, 4, '6684596958', '6687589632', '', 'nachitop@hotmail.co', 0, 'Prados', '2545', '', 25, 1878, 'Los Mochis', 'El Parque', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'A-', 'ninguna', 'ninguna', 'ninguna', '1,1,1,1,1,1,0,1,1,1');
-INSERT INTO `medico` VALUES (9, 'med3', 'medico', 'Elizabeth', 'Gaxiola', 'Carrillo', '2', '2019-07-21', '', '20', 'UAS', 1, 2, '6681265843', '6684568569', '6684568568', 'Elyzabet@hotmail.com', 0, 'Tortugas', '1230', '', 25, 1878, 'Tortugas 1', 'Las tortugas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ninguna', 'ninguna', NULL, '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (2, 'med5', 'medico', 'Grace', 'Valenzuela', 'Camaccho', '2', '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 0, 0, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (4, '', '', 'Janeth', 'Sosa', 'Guevara', '2', '1980-12-07', '', '85221477', '', 4, 3, '', '', '', '', 1, '', '', '', 25, 1878, '', '', '', '', '', '', '', '', '', 'null', '', '', '', '1,1,1,1,0,1,0,1,0,1,1');
+INSERT INTO `medico` VALUES (5, 'med2', 'medico', 'Edgar Rafael', 'Rembao', 'Quintero', '1', '1997-01-08', '', '25', 'UAS', 4, 5, '6681241186', '6681241186', '6681241186', 'edgarembao18@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los Mochis', 'jardines del bosque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OHR+', 'niguna', 'ninguna', 'ahorita no joven', '1,1,1,1,1,1,0,1,1,1,1');
+INSERT INTO `medico` VALUES (6, 'undefined', 'undefined', 'Kevin', 'Vazquez', 'Niebla', '2', '1997-03-01', '', '25366946', 'UAS', 1, 2, '6681256341', '6681693214', '6681996633', 'Kevin@hotmail.com', 0, 'Centenario', '3334', '', 0, 0, 'Los Mochis', 'Nuevo Horizonte', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'polvo', 'feo', 'no sirve para nada pero es buen compa', '1,1,1,1,1,1,1,1,1,1');
+INSERT INTO `medico` VALUES (7, 'med4', 'medico', 'Eduardo', 'Cota', 'Cota', '1', '1997-12-12', '', '20', 'UNIVERSIDAD AUTONOMA DE SINALO', 2, 1, '6682456896', '6682456896', '', 'Lalocota@hotmail.com', 0, 'lluevia de plata', '2066', '', 0, 0, 'Los mochis', 'Teresita', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'las mujeres', 'ser feo', 'medio mamon', '1,1,1,1,1,1,0,1,1,1,1');
+INSERT INTO `medico` VALUES (8, '', '', 'Ignacio', 'Sanchez', 'Mundo', '1', '1998-07-09', '', '66896854', 'UAS', 2, 4, '6684596958', '6687589632', '', 'nachitop@hotmail.co', 0, 'Prados', '2545', '', 25, 1878, 'Los Mochis', 'El Parque', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'A-', 'ninguna', 'ninguna', 'ninguna', '1,1,1,1,1,1,0,1,1,1,1');
+INSERT INTO `medico` VALUES (9, 'med3', 'medico', 'Elizabeth', 'Gaxiola', 'Carrillo', '2', '2019-07-21', '', '20', 'UAS', 1, 2, '6681265843', '6684568569', '6684568568', 'Elyzabet@hotmail.com', 0, 'Tortugas', '1230', '', 25, 1878, 'Tortugas 1', 'Las tortugas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ninguna', 'ninguna', NULL, '1,1,1,1,1,1,0,1,1,1,1');
 
 -- ----------------------------
 -- Table structure for municipio
