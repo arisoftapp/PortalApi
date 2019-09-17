@@ -49,6 +49,25 @@ citaModel.getCitas = (callback) => {
     }
 };
 
+citaModel.getCitasPaciente = (id_paciente, callback) => {
+    //console.log(idEmpresa);
+    if (dbAdmin) {
+        dbAdmin.query(`select c.*, p.nombre as paciente, p.ap_paterno as ap_paciente,
+        m.nombre as medico, m.ap_paterno as ap_medico, pc.prioridad, tc.tipo from  citas as c 
+        INNER JOIN	paciente as p on c.id_paciente = p.id_paciente
+        INNER JOIN medico as m on c.id_medico = m.id_medico
+        INNER JOIN prioridad_cita as pc on c.id_prioridad = pc.id_prioridad
+        INNER JOIN tipo_cita as tc on c.id_tipo = tc.id_tipo WHERE p.id_paciente =` + id_paciente, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);
+            }
+        });
+    }
+};
+
 citaModel.insertCita = (citaData, callback) => {
     if (dbAdmin){
         dbAdmin.query(`INSERT INTO citas SET ? `, citaData, (error, rows) => {

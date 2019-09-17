@@ -33,6 +33,23 @@ app.get('/citas', (req, res) => {
         }
     });
 });
+//Se consiguen las consultas del paciente
+app.get('/citas/:id_paciente', (req, res) => {
+    var id = req.params.id_paciente;
+    cita.getCitasPaciente(id, (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Ocurrió un error al obtener los datos"
+            });
+        } else{
+            res.json({
+                success: true,
+                data: data
+            });
+        }
+    });
+});
 
 app.get('/tipo', (req, res) => {
     cita.getTipo((err, data) => {

@@ -34,5 +34,23 @@ consultaModel.insertConsulta = (consultaData, tratamiento, callback) => {
     }
 }
 
+consultaModel.getConsultaPaciente = (id_paciente, callback) => {
+    //console.log(idEmpresa);
+    if (dbAdmin) {
+        dbAdmin.query(`select c.*, p.nombre as paciente, p.ap_paterno as ap_paciente,
+        m.nombre as medico, m.ap_paterno as ap_medico from  consulta as c 
+        INNER JOIN	paciente as p on c.id_paciente = p.id_paciente
+        INNER JOIN medico as m on c.id_medico = m.id_medico
+        WHERE p.id_paciente =` + id_paciente, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);
+            }
+        });
+    }
+};
+
 
 module.exports = consultaModel;
