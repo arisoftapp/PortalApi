@@ -15,6 +15,12 @@ app.post('/consulta', (req, res) => {
         glucosa:  req.body.glucosa,
         diagnostico: req.body.diagnostico,
         fecha: f,
+        motivo: req.body.motivo,
+        interrogatorio: req.body.interrogatorio,
+        FR: req.body.FR,
+        FC: req.body.FC,
+        temperatura: req.body.temperatura,
+        imc: req.body.imc,
     };
     const tratamiento= req.body.tratamiento;
     consulta.insertConsulta(consultaData, tratamiento, (err, data) => {

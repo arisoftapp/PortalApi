@@ -11,7 +11,7 @@
  Target Server Version : 100316
  File Encoding         : 65001
 
- Date: 30/08/2019 11:41:05
+ Date: 18/09/2019 12:29:57
 */
 
 SET NAMES utf8mb4;
@@ -36,6 +36,17 @@ INSERT INTO `asis_medico` VALUES (1, 5);
 INSERT INTO `asis_medico` VALUES (1, 9);
 INSERT INTO `asis_medico` VALUES (2, 1);
 INSERT INTO `asis_medico` VALUES (2, 8);
+INSERT INTO `asis_medico` VALUES (5, 1);
+INSERT INTO `asis_medico` VALUES (6, 5);
+INSERT INTO `asis_medico` VALUES (6, 6);
+INSERT INTO `asis_medico` VALUES (6, 9);
+INSERT INTO `asis_medico` VALUES (7, 5);
+INSERT INTO `asis_medico` VALUES (7, 6);
+INSERT INTO `asis_medico` VALUES (7, 9);
+INSERT INTO `asis_medico` VALUES (8, 1);
+INSERT INTO `asis_medico` VALUES (8, 5);
+INSERT INTO `asis_medico` VALUES (8, 6);
+INSERT INTO `asis_medico` VALUES (8, 9);
 
 -- ----------------------------
 -- Table structure for asistente
@@ -56,14 +67,18 @@ CREATE TABLE `asistente`  (
   `tel_add` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `permisos` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_asistente`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of asistente
 -- ----------------------------
-INSERT INTO `asistente` VALUES (1, 'asis', 'asis', 'Carmen', 'Romero', 'Verdugo', 'Prados', '2066', 'null', 'jardines del bosque', '2147483647', '6681245872', '1,1,1,1,0,0,0,1,0,0');
-INSERT INTO `asistente` VALUES (2, 'asis2', 'asis', 'Evelyn Guadalupe', 'Castro', 'Galaviz', 'Zapotillo', '2515', '', 'Zapotillo 1', '6684258696', '6666666666', '1,1,1,0,0,0,0,1,0');
+INSERT INTO `asistente` VALUES (1, 'carmen', 'asis', 'Carmen', 'Romero', 'Verdugo', 'Prados', '2066', 'null', 'jardines del bosque', '2147483647', '6681245872', '1,1,1,1,1,1,1,1,1');
+INSERT INTO `asistente` VALUES (2, 'evelyn', 'asis', 'Evelyn Guadalupe', 'Castro', 'Galaviz', 'Zapotillo', '2515', '', 'Zapotillo 1', '6684258696', '6666666666', '1,1,1,0,0,0,0,1,0');
 INSERT INTO `asistente` VALUES (4, '', '', 'Juan Manuel', 'Rocha ', 'Chavez', 'de la soledad', '568', 'null', 'amargura', '6684628456', '6682463135', '1,1,1,0,0,0,0,1,0');
+INSERT INTO `asistente` VALUES (5, 'null', 'null', 'Placido', 'Lopez', 'Perez', 'Rosales', '501', 'null', 'Centro', '6682563654', '6685654545', '0,0,0,0,0,0,0,0,0,0');
+INSERT INTO `asistente` VALUES (6, NULL, NULL, 'Sofia', 'Vergara', 'De la Cruz', 'Ingacio Ayende', '258', '', 'Por Ahi', '2147483647', '6681241186', '0,0,0,0,0,0,0,0,0,0');
+INSERT INTO `asistente` VALUES (7, NULL, NULL, 'Eduardo', 'Castro', 'Quintero', 'lluevia de plata', '345', NULL, 'Zapotillo ', '6681241183', '6685247274', '0,0,0,0,0,0,0,0,0,0');
+INSERT INTO `asistente` VALUES (8, NULL, NULL, 'Joel', 'Martines', 'de la cueba', 'retorno los murcielagos', '2299', NULL, 'Mallorca', '6682456896', '6681693214', '0,0,0,0,0,0,0,0,0,0');
 
 -- ----------------------------
 -- Table structure for citas
@@ -82,7 +97,7 @@ CREATE TABLE `citas`  (
   `sintomas` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` int(5) NULL DEFAULT NULL,
   PRIMARY KEY (`id_cita`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of citas
@@ -102,7 +117,41 @@ INSERT INTO `citas` VALUES (16, 5, 9, 3, 1, '2019-08-14', '06:30', '07:00', NULL
 INSERT INTO `citas` VALUES (17, 4, 8, 4, 1, '2019-08-22', '02:24', '02:54', NULL, 'no hay', 1);
 INSERT INTO `citas` VALUES (18, 5, 1, 2, 1, '2019-08-22', '05:04', '05:34', NULL, 'no hay', 1);
 INSERT INTO `citas` VALUES (19, 2, 2, 3, 1, '2019-08-23', '06:02', '06:33', NULL, 'sda', 1);
-INSERT INTO `citas` VALUES (20, 1, 1, 1, 1, '2019-08-27', '10:05', '10:35', NULL, 'ninguno viene por gusto', 1);
+INSERT INTO `citas` VALUES (20, 1, 1, 1, 1, '2019-09-12', '10:05', '10:35', NULL, 'ninguno viene por gusto', 2);
+INSERT INTO `citas` VALUES (21, 5, 1, 1, 2, '2019-09-06', '06:31', '07:01', NULL, 'no existe', 1);
+INSERT INTO `citas` VALUES (22, 5, 1, 2, 1, '2019-09-12', '12:04', '12:34', NULL, NULL, 3);
+INSERT INTO `citas` VALUES (23, 2, 1, 1, 5, '2019-09-18', '10:30', '11:00', NULL, 'no escucha, creo es sorda', 1);
+
+-- ----------------------------
+-- Table structure for consulta
+-- ----------------------------
+DROP TABLE IF EXISTS `consulta`;
+CREATE TABLE `consulta`  (
+  `id_consulta` int(10) NOT NULL AUTO_INCREMENT,
+  `id_cita` int(10) NULL DEFAULT NULL,
+  `id_medico` int(10) NULL DEFAULT NULL,
+  `id_paciente` int(255) NULL DEFAULT NULL,
+  `peso` int(10) NULL DEFAULT NULL,
+  `altura` int(10) NULL DEFAULT NULL,
+  `presion` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `glucosa` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `diagnostico` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `fecha` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `motivo` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `interrogatorio` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `FR` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `FC` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `temperatura` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `imc` double(5, 0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_consulta`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of consulta
+-- ----------------------------
+INSERT INTO `consulta` VALUES (1, 22, 1, 5, 60, 180, '120/80', '60', 'se siente mal', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `consulta` VALUES (2, 20, 1, 1, 75, 165, '120/80', '75', 'se siente malita ', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `consulta` VALUES (3, 23, 1, 2, 60, 170, '120/80', '65', 'sorda', '2019-9-17', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for consultorio
@@ -119,7 +168,7 @@ CREATE TABLE `consultorio`  (
 -- ----------------------------
 INSERT INTO `consultorio` VALUES (0, 'Sin Asignar');
 INSERT INTO `consultorio` VALUES (1, 'Urgencias');
-INSERT INTO `consultorio` VALUES (2, 'Nuevo departamento');
+INSERT INTO `consultorio` VALUES (2, 'Mujeres');
 INSERT INTO `consultorio` VALUES (3, 'Cuidados intensivos ');
 INSERT INTO `consultorio` VALUES (5, 'Pediatría');
 
@@ -325,7 +374,7 @@ CREATE TABLE `medico`  (
 -- Records of medico
 -- ----------------------------
 INSERT INTO `medico` VALUES (1, 'medico', 'medico', 'Joaquín', 'Cervantes', 'Díaz', '1', '1970-07-16', '', '85214700', 'Universidad Autónoma de Sinaloa', 4, 3, '9901136', '6691113926', '', 'j.cervantes@miclinica.com', 0, 'Av. Insurgentes', '1596', '0', 0, 0, 'Mazatlán', 'La Marina', '', '', '', '', '', '', '', 'A+', 'ninguna', 'Gastritis', 'anotacion', '1,1,1,1,1,1,1,1,1,1');
-INSERT INTO `medico` VALUES (2, 'med5', 'medico', 'Grace', 'Valenzuela', 'Camaccho', '2', '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 0, 0, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN', '1,1,1,1,1,1,0,1,1,1');
+INSERT INTO `medico` VALUES (2, 'medicasa', 'medico', 'Grace', 'Valenzuela', 'Camaccho', '2', '1997-10-08', '', '66645789', 'UAD', 2, 4, '6681546936', '6681246958', '', 'Grace@hotmail.com', 0, 'Alfredo Aladama', '1452', '', 0, 0, 'Rosales', 'Rosales', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'ORH+', 'NIN', 'estar fea', 'NIN', '1,1,1,1,1,1,0,1,1');
 INSERT INTO `medico` VALUES (4, '', '', 'Janeth', 'Sosa', 'Guevara', '2', '1980-12-07', '', '85221477', '', 4, 3, '', '', '', '', 1, '', '', '', 25, 1878, '', '', '', '', '', '', '', '', '', 'null', '', '', '', '1,1,1,1,0,1,0,1,0,1,1');
 INSERT INTO `medico` VALUES (5, 'med2', 'medico', 'Edgar Rafael', 'Rembao', 'Quintero', '1', '1997-01-08', '', '25', 'UAS', 4, 5, '6681241186', '6681241186', '6681241186', 'edgarembao18@hotmail.com', 0, 'lluevia de plata', '2066', '', 25, 1878, 'Los Mochis', 'jardines del bosque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OHR+', 'niguna', 'ninguna', 'ahorita no joven', '1,1,1,1,1,1,0,1,1,1,1');
 INSERT INTO `medico` VALUES (6, 'undefined', 'undefined', 'Kevin', 'Vazquez', 'Niebla', '2', '1997-03-01', '', '25366946', 'UAS', 1, 2, '6681256341', '6681693214', '6681996633', 'Kevin@hotmail.com', 0, 'Centenario', '3334', '', 0, 0, 'Los Mochis', 'Nuevo Horizonte', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'polvo', 'feo', 'no sirve para nada pero es buen compa', '1,1,1,1,1,1,1,1,1,1');
@@ -2834,7 +2883,7 @@ CREATE TABLE `paciente`  (
   `cronicas` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   `anotacion` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '',
   PRIMARY KEY (`id_paciente`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of paciente
@@ -2903,6 +2952,37 @@ INSERT INTO `tipo_cita` VALUES (2, 'Extracción Molar');
 INSERT INTO `tipo_cita` VALUES (3, 'Limpieza dental');
 INSERT INTO `tipo_cita` VALUES (4, 'Irritacion capilar');
 INSERT INTO `tipo_cita` VALUES (5, 'Limpieza de Oido');
+
+-- ----------------------------
+-- Table structure for tratamiento
+-- ----------------------------
+DROP TABLE IF EXISTS `tratamiento`;
+CREATE TABLE `tratamiento`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_consulta` int(10) NULL DEFAULT NULL,
+  `medicamento` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `docis` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `via` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `frecuencia` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `duracion` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tratamiento
+-- ----------------------------
+INSERT INTO `tratamiento` VALUES (1, 1, 'paracetamol', '2 tabletas', 'oral', '8hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (2, 1, 'ibuprufeno', '1 tableta', 'oral', '12 hrs', '2 semanas');
+INSERT INTO `tratamiento` VALUES (3, 2, 'lomecan', '1 tableta', 'oral', '8hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (4, 2, 'lupirionol', '1 tableta', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (5, 2, 'lupirinol', '1', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (6, 2, 'lupirinol', '1', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (7, 2, 'paracetamol', '2 tabletas', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (8, 2, 'lupirinol', '1', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (9, 2, 'paracetamol', '2 tabletas', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (10, 2, 'lupirinol', '1', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (11, 3, 'lupirinol', '1', 'oral', '12 hrs', '1 semana');
+INSERT INTO `tratamiento` VALUES (12, 3, 'paracetamol', '2 tabletas', 'oral', '12 hrs', '1 semana');
 
 -- ----------------------------
 -- Table structure for usuario
