@@ -3,7 +3,7 @@ let consultaModel = {};
 
 
 
-consultaModel.insertConsulta = (consultaData, tratamiento, callback) => {
+consultaModel.insertConsulta = (consultaData, tratamiento, examenes, callback) => {
     if (dbAdmin){
         dbAdmin.query(`INSERT INTO consulta SET ? `, consultaData, (error, rows) => {
             if (error) {
@@ -16,7 +16,6 @@ consultaModel.insertConsulta = (consultaData, tratamiento, callback) => {
             if (error) {
                 console.log(error);
             } else {  
-               
                 console.log(rows[0].id);
                 for(let item of tratamiento) {
                     
@@ -28,10 +27,27 @@ consultaModel.insertConsulta = (consultaData, tratamiento, callback) => {
                         } else {                  
                         }
                     });
-                }   
+                }
+                var array = [];
+            /*<<<<<<<PENDIENTE NO QUIERE INSERTARLO>>>>>>>>>>>>>>>>>>>
+                for(let items of examenes) {
+                    array.examen = items;
+                    array.id_consulta = rows[0].id;
+                    
+                    console.log(array);
+                    dbAdmin.query(`INSERT INTO consulta_examen (examen, id_consulta)SET ? `, array, (error, rows) => {
+                        if (error) {
+                            console.log(error);
+                        } else {                  
+                        }
+                    });
+                }  */ 
             }
+
         });
+        
     }
+
 }
 
 consultaModel.getConsultaPaciente = (id_paciente, callback) => {

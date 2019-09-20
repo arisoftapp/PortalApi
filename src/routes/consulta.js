@@ -23,7 +23,10 @@ app.post('/consulta', (req, res) => {
         imc: req.body.imc,
     };
     const tratamiento= req.body.tratamiento;
-    consulta.insertConsulta(consultaData, tratamiento, (err, data) => {
+    const examenes = req.body.examenes;
+    console.log(examenes);
+    
+    consulta.insertConsulta(consultaData, tratamiento, examenes, (err, data) => {
         if (err){
             res.json({
                 success: false,
