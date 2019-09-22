@@ -5,7 +5,7 @@ let consultaModel = {};
 
 consultaModel.insertConsulta = (consultaData, tratamiento, examenes, callback) => {
     if (dbAdmin){
-        dbAdmin.query(`INSERT INTO consulta SET ? `, consultaData, (error, rows) => {
+       dbAdmin.query(`INSERT INTO consulta SET ? `, consultaData, (error, rows) => {
             if (error) {
                 console.log(error);
             } else {                  
@@ -18,30 +18,31 @@ consultaModel.insertConsulta = (consultaData, tratamiento, examenes, callback) =
             } else {  
                 console.log(rows[0].id);
                 for(let item of tratamiento) {
-                    
+                    console.log(item)
                     item.id_consulta = rows[0].id;
-                    console.log(item);
-                    dbAdmin.query(`INSERT INTO tratamiento SET ? `, item, (error, rows) => {
+                    
+                   dbAdmin.query(`INSERT INTO tratamiento SET ? `, item, (error, rows) => {
                         if (error) {
                             console.log(error);
                         } else {                  
                         }
                     });
                 }
-                var array = [];
-            /*<<<<<<<PENDIENTE NO QUIERE INSERTARLO>>>>>>>>>>>>>>>>>>>
-                for(let items of examenes) {
-                    array.examen = items;
+                var array = {};
+                //<<<<<<<PENDIENTE NO QUIERE INSERTARLO>>>>>>>>>>>>>>>>>>>
+               for(let items of examenes) {
+                    array = {}
+                    array.examen = items
                     array.id_consulta = rows[0].id;
-                    
-                    console.log(array);
-                    dbAdmin.query(`INSERT INTO consulta_examen (examen, id_consulta)SET ? `, array, (error, rows) => {
+                    array=  array
+                    console.log(array)
+                    dbAdmin.query(`INSERT INTO consulta_examen SET ? `, array, (error, rows) => {
                         if (error) {
                             console.log(error);
                         } else {                  
                         }
                     });
-                }  */ 
+                }
             }
 
         });

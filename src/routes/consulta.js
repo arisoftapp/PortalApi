@@ -24,7 +24,7 @@ app.post('/consulta', (req, res) => {
     };
     const tratamiento= req.body.tratamiento;
     const examenes = req.body.examenes;
-    console.log(examenes);
+  
     
     consulta.insertConsulta(consultaData, tratamiento, examenes, (err, data) => {
         if (err){
