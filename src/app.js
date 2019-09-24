@@ -84,6 +84,7 @@ require ('./routes/paciente')(server);
 require ('./routes/citas')(server);
 require ('./routes/asistente')(server);
 require ('./routes/consulta')(server);
+require ('./routes/historial')(server);
 
 const Server = server.listen(server.get('port'), () => {
     console.log("MedicalWebService in the port 3005");

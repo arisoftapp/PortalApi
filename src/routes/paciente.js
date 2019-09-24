@@ -60,7 +60,8 @@ module.exports = function (app) {
             tipo_sangre : req.body.tipo_sangre,
             alergias : req.body.alergias,
             cronicas : req.body.cronicas,
-            anotacion : req.body.anotacion
+            anotacion : req.body.anotacion,
+            historial: 1
         };
 
         if (!pacienteData.datos_fact){

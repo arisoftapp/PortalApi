@@ -29,7 +29,7 @@ consultaModel.insertConsulta = (consultaData, tratamiento, examenes, callback) =
                     });
                 }
                 var array = {};
-                //<<<<<<<PENDIENTE NO QUIERE INSERTARLO>>>>>>>>>>>>>>>>>>>
+               
                for(let items of examenes) {
                     array = {}
                     array.examen = items
