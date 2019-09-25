@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     app.get('/paciente/:id_paciente', (req, res) => {
         var id_pac = req.params.id_paciente;
-        console.log(id_pac);
+       
         
         paciente.getPaciente(id_pac, (err, data) => {
             if (err) {
@@ -87,7 +87,7 @@ module.exports = function (app) {
                     });
                 }else{
                     FacturacionData.id_paciente = data.insertId;
-                    console.log(FacturacionData.id_paciente);
+                   
                 }
             });
         } else {

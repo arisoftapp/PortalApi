@@ -80,7 +80,6 @@ app.post('/citas', (req, res) => {
         status: req.body.status
     };
     cita.insertCita(citaData, (err, data) => {
-        console.log(data);
         if (err){
             res.json({
                 success: false,

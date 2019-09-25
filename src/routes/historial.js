@@ -30,12 +30,12 @@ app.post('/historial', (req, res) => {
             message: "¡Registro exitoso!"
         });
     }
-});
+    });
 });
 
 
 app.put('/historialPaciente', (req, res) => {
-    console.log(req.body)
+    console.log("put")
     const id =  req.body.id_paciente
     
     historial.updatePaciente(id, (err, data) => {

@@ -8,7 +8,7 @@ medicoModel.getMedicos = (callback) => {
         FROM medico AS a
         LEFT JOIN consultorio AS d ON a.id_consultorio = d.id_consultorio`, function(err, rows) {
             if (err) {
-                throw err;
+                console.log(err);
             }
             else {
                 callback(null, rows);
@@ -29,7 +29,7 @@ medicoModel.getMedico = (id_medico, callback) => {
         LEFT JOIN municipio AS f ON a.id_municipio = f.id_municipio
         WHERE a.id_medico = ` + id_medico, function(err, rows) {
             if (err) {
-                throw err;
+                console.log(err);
             }
             else {
                 callback(null, rows);

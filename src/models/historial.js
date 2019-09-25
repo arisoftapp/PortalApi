@@ -3,12 +3,15 @@ let dbAdmin = require('../dbAdmin');
 let historialModel = {};
 
 historialModel.insertHistorial = (historialData, familiares, callback) => {
+
     if (dbAdmin){
         dbAdmin.query(`INSERT INTO historial_medico SET ? `, historialData, (error, rows) => {
             if (error) {
                 console.log(error);
             } else {
-            for(let item of familiares) {          
+            for(let item of familiares) {
+                console.log(item);
+                        
                 dbAdmin.query(`INSERT INTO antecedentes_familiares SET ? `, item, (error, rows) => {
                     if (error) {
                         console.log(error);
