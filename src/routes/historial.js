@@ -52,4 +52,22 @@ app.put('/historialPaciente', (req, res) => {
         }
     });
 });
+
+app.get('/historial/:id_paciente', (req, res) => {
+    var id = req.params.id_paciente;
+    historial.getHistorial(id, (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Ocurrió un error al obtener los datos"
+            });
+        } else{
+            res.json({
+                success: true,
+                data: data
+            });
+        }
+    });
+});
+
 }

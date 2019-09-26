@@ -41,4 +41,19 @@ historialModel.updatePaciente = (id_paciente, callback) =>{
     }
 }
 
+historialModel.getHistorial = (id_paciente, callback) => {
+    //console.log(idEmpresa);
+    if (dbAdmin) {
+        dbAdmin.query(`select h.*, af.enfermedad, af.parentesco from historial_medico as h 
+            LEFT JOIN antecedentes_familiares as af on h.id_paciente = af.id_paciente WHERE h.id_paciente =` + id_paciente, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);
+            }
+        });
+    }
+};
+
 module.exports = historialModel;
