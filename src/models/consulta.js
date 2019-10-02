@@ -69,5 +69,35 @@ consultaModel.getConsultaPaciente = (id_paciente, callback) => {
     }
 };
 
+consultaModel.getDetallesConsulta = (id_consulta,tipo, callback) => {
+    //console.log(idEmpresa);
+    
+    if (dbAdmin) {
+        if (tipo == 1){
+        console.log("entro 1");
+        dbAdmin.query(`select t.* FROM tratamiento as t
+        WHERE t.id_consulta =` + id_consulta, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);  
+            }
+        });
+        }else{
+        console.log("entro 2");
+        dbAdmin.query(`select t.* FROM consulta_examen as t
+        WHERE t.id_consulta =` + id_consulta, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);  
+            }
+        });
+    }
+    }
+};
+
 
 module.exports = consultaModel;

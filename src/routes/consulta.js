@@ -58,4 +58,23 @@ app.get('/consulta/:id_paciente', (req, res) => {
     });
 });
 
+
+app.get('/detallesConsulta/:id_paciente/:tipo', (req, res) => {
+    var id = req.params.id_paciente;
+    var tipo = req.params.tipo;
+    consulta.getDetallesConsulta(id,tipo, (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Ocurrió un error al obtener los datos"
+            });
+        } else{
+            res.json({
+                success: true,
+                data: data
+            });
+        }
+    });
+});
+
 }
