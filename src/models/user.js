@@ -33,7 +33,7 @@ userModel.getUserByUsername = (username, callback) => {
     }
 };
 
-userModel.getUserByAdminUsername = (username, callback) => {
+/*userModel.getUserByAdminUsername = (username, callback) => {
     if (dbAdmin) {
         dbAdmin.query(`SELECT username, password FROM empresa WHERE username = '` + username +`'`, function(err, row) {
             if (err) {
@@ -44,24 +44,11 @@ userModel.getUserByAdminUsername = (username, callback) => {
             }
         });
     }
-};
+};*/
 
-userModel.getUserByAsistantUsername = (username, callback) => {
+userModel.getUserByAdminUsername = (username, callback) => {
     if (dbAdmin) {
-        dbAdmin.query(`SELECT username, password, id_asistente, permisos, CONCAT(nombre,  ' ', ap_paterno) AS name FROM asistente WHERE username = ?`, [username], function(err, row) {
-            if (err) {
-                throw err;
-            }
-            else {
-                callback(null, row);
-            }
-        });
-    }
-};
-
-userModel.getUserByMedicUsername = (username, callback) => {
-    if (dbAdmin) {
-        dbAdmin.query(`SELECT username, password, id_medico, permisos, CONCAT(nombre,  ' ', ap_paterno) AS name FROM medico WHERE username = ?`, [username], function(err, row) {
+        dbAdmin.query(`SELECT username, password FROM user WHERE username = ?`, [username], function(err, row) {
             if (err) {
                 throw err;
             }

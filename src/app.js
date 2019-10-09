@@ -76,37 +76,10 @@ server.use(function (req, res, next) {
 
 //// Middleware token - Todas las rutas bajo esto estaran protegidas \\\\
 require ('./routes/user')(server);
-require ('./routes/especialidad')(server);
-require ('./routes/consultorio')(server);
-require ('./routes/medico')(server);
-require ('./routes/entidad')(server);
-require ('./routes/paciente')(server);
-require ('./routes/citas')(server);
-require ('./routes/asistente')(server);
-require ('./routes/consulta')(server);
-require ('./routes/historial')(server);
+require ('./routes/folios')(server);
+
+
 
 const Server = server.listen(server.get('port'), () => {
-    console.log("MedicalWebService in the port 3005");
+    console.log("Portal in the port 3005");
 });
-
-//CHAT
-const SocketIO = require('socket.io');
-const io = SocketIO(Server);
-
-io.on("connection", socket => {
-    //MENSAJE, CUANDO UN USUARIO SE A CONECTADO
-    console.log("user connected");
-    
-    //MENSAJE CUADO SE DESCONECTA UN USUARIO
-    socket.on("disconnect", function() {
-      console.log("user disconnected");
-    });
-   
-    //EMISION DE MENSAJES
-    socket.on("message", message => {
-      console.log("Message Received: " + message);
-      socket.broadcast.emit("message", {id_recptor: message.id_receptor, id:message.id, emisor: message.emisor, mensaje: message.mensaje , receptor: message.receptor});
-    });
-  });
-
