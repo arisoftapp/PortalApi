@@ -48,7 +48,7 @@ userModel.getUserByUsername = (username, callback) => {
 
 userModel.getUserByAdminUsername = (username, callback) => {
     if (dbAdmin) {
-        dbAdmin.query(`SELECT username, password FROM user WHERE username = ?`, [username], function(err, row) {
+        dbAdmin.query(`SELECT * FROM user WHERE username = ?`, [username], function(err, row) {
             if (err) {
                 throw err;
             }

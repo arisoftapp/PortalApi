@@ -8,8 +8,8 @@ const config = require('./config');
 
 server.use(cors({ credentials: true, origin: true }));
 //settings
-const port = process.env.PORT || 3005;
-server.set('port', process.env.PORT || 3005);
+const port = process.env.PORT || 3006;
+server.set('port', process.env.PORT || 3006);
 server.set('secret', config.secret);
 //middleware
 server.use(morgan('dev'));
@@ -81,5 +81,5 @@ require ('./routes/folios')(server);
 
 
 const Server = server.listen(server.get('port'), () => {
-    console.log("Portal in the port 3005");
+    console.log("Portal in the port 3006");
 });

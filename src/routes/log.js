@@ -4,7 +4,7 @@ const moment = require('moment');
 
 module.exports = function (app) {
     app.post('/log', (req, res) => {
-        var puesto = "";
+        var empresa = "";
         var pass = "";
         var username = "";
         var user_req = req.body.username;
@@ -23,9 +23,10 @@ module.exports = function (app) {
                         message: 'El usuario indicado no existe',
                     });
                 } else {
-                    
+                    console.log(data[0]);
                     pass = data[0].password;
                     username = data[0].username;
+                    empresa = data[0].id_empresa;
                     if (pass != req.body.password) {
                         res.json({ 
                             success: false,
@@ -33,7 +34,7 @@ module.exports = function (app) {
                         });
                     } else{
                         const payload = {
-                            puesto: puesto,
+                            empresa: empresa,
                             username: username,
                         };
                         var token = jwt.sign(payload, app.get('secret'), {
@@ -46,6 +47,7 @@ module.exports = function (app) {
                             message: 'Bienvenido',
                             expiresIn: expiraEn,
                             token: token,
+                            empresa: empresa
                         });
                     }
                 }
