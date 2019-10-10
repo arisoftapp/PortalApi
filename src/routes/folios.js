@@ -56,20 +56,21 @@ app.put('/comentario', (req, res) => {
         }
     });
 });
-/*
-app.post('/citas', (req, res) => {
-    const citaData = {
-        id_paciente: req.body.id_paciente,
-        id_medico:  req.body.id_medico,
-        id_prioridad:   req.body.id_prioridad,
-        id_tipo:   req.body.id_tipo,
-        hora:   req.body.hora,
-        hora_f: req.body.hora_f,
-        fecha:  req.body.fecha,
-        sintomas:   req.body.sintomas,
-        status: req.body.status
+
+app.post('/insert', (req, res) => {
+    const folioData = {
+        folio_previo: req.body.folio_previo,
+        fecha_previo: req.body.fecha_previo,
+        folio_oc: req.body.folio_oc,
+        fecha_oc: req.body.fecha_oc,
+        id_provedor: req.body.id_provedor,
+        id_almacen: req.body.id_almacen,
+        id_detalles: req.body.id_detalles,
+        id_empresa: req.body.id_empresa,
+        usuario: req.body.usuario,
+        estatus: 1
     };
-    cita.insertCita(citaData, (err, data) => {
+    folio.insertFolio(folioData, (err, data) => {
         if (err){
             res.json({
                 success: false,
@@ -85,6 +86,6 @@ app.post('/citas', (req, res) => {
 });
 
 
-*/
+
 
 }

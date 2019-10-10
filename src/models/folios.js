@@ -52,10 +52,10 @@ foliosModel.updateComentario = (data, callback) =>{
         });
     }
 };
-/*
-foliosModel.insertCita = (citaData, callback) => {
+
+foliosModel.insertFolio = (foliosData, callback) => {
     if (dbAdmin){
-        dbAdmin.query(`INSERT INTO citas SET ? `, citaData, (error, rows) => {
+        dbAdmin.query(`INSERT INTO folios SET ? `, foliosData, (error, rows) => {
             if (error) {
                 console.log(error);
             } else {                  
@@ -65,6 +65,4 @@ foliosModel.insertCita = (citaData, callback) => {
     }
 }
 
-
-*/
 module.exports = foliosModel;
