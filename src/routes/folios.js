@@ -68,6 +68,7 @@ app.post('/insert', (req, res) => {
         id_detalles: req.body.id_detalles,
         id_empresa: req.body.id_empresa,
         usuario: req.body.usuario,
+        comentario_in: req.body.comentario_in,
         estatus: 1
     };
     folio.insertFolio(folioData, (err, data) => {
@@ -85,7 +86,39 @@ app.post('/insert', (req, res) => {
     });
 });
 
+app.post('/insertDetalles', (req, res) => {
+    const reqdata = req.body;
+    folio.insertDetalles(reqdata, (err, data) => {
+        if (err){
+            res.json({
+                success: false,
+                message: err
+            });
+        }else{
+            res.json({
+                success: true,
+                message: "¡Registro exitoso!"
+            });
+        }
+    });
+});
 
+app.post('/insertArticulo', (req, res) => {
+    const reqdata = req.body;
+    folio.insertarticulo(reqdata, (err, data) => {
+        if (err){
+            res.json({
+                success: false,
+                message: err
+            });
+        }else{
+            res.json({
+                success: true,
+                message: "¡Registro exitoso!"
+            });
+        }
+    });
+});
 
 
 }

@@ -65,4 +65,37 @@ foliosModel.insertFolio = (foliosData, callback) => {
     }
 }
 
+foliosModel.insertDetalles = (reqData, callback) => {
+    if (dbAdmin){
+        let row;
+        for(let item of reqData) {
+            item.pendiente = parseInt(item.cantidad, 10) - parseInt(item.recibido, 10),
+            dbAdmin.query(`INSERT INTO detalles_folio SET ? `, item, (error, rows) => {
+                if (error) {
+                    console.log(error);
+                } else {                  
+                    row= rows;
+                }
+            });
+        }
+        callback(null, row);  
+    }
+}
+
+foliosModel.insertarticulo = (reqData, callback) => {
+    if (dbAdmin){
+        let row;
+        for(let item of reqData) {
+            dbAdmin.query(`INSERT INTO articulos SET ? `, item, (error, rows) => {
+                if (error) {
+                    console.log(error);
+                } else {                  
+                    row= rows;
+                }
+            });
+        }
+        callback(null, row);  
+    }
+}
+
 module.exports = foliosModel;
