@@ -7,7 +7,7 @@ foliosModel.getFolios = (callback) => {
     if (dbAdmin) {
         dbAdmin.query(`select f.*, a.nombre as almacen , p.nombre as proveedor, e.nombre as empresa from folios as f 
         LEFT JOIN almacen as a on f.id_almacen = a.id_almacen
-        LEFT JOIN proveedor as p on f.id_almacen = p.id_pro
+        LEFT JOIN proveedor as p on f.id_provedor = p.id_pro
         LEFT JOIN empresa as e on f.id_empresa = e.id_empresa`, function(err, rows) {
             if (err) {
                 throw err;
@@ -22,9 +22,9 @@ foliosModel.getFolios = (callback) => {
 foliosModel.getDetalles = (id, callback) => {
     //console.log(idEmpresa);
     if (dbAdmin) {
-        dbAdmin.query(`select d.*, a.articulo from detalles_folio as d 
-        LEFT JOIN articulos as a on d.id_articulo = a.id_articulo
-        where d.id_detalles = `+id, function(err, rows) {
+        dbAdmin.query(`select d.*, a.articulo from detalles_folio as d
+        LEFT JOIN articulos as a on d.id_articulo = a.id_articulo and d.id_empresa = a.id_empresa
+        where d.folio_oc =`+`'`+id+`'`, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -34,6 +34,22 @@ foliosModel.getDetalles = (id, callback) => {
         });
     }
 };
+
+foliosModel.getAlmacen = (id, callback) => {
+    //console.log(idEmpresa);
+    if (dbAdmin) {
+        dbAdmin.query(`select * from almacen where id_empresa =`+`'`+id+`'`, function(err, rows) {
+            if (err) {
+                throw err;
+            }
+            else {
+                callback(null, rows);
+            }
+        });
+    }
+};
+
+
 
 foliosModel.updateComentario = (data, callback) =>{
     console.log(data)
@@ -65,6 +81,73 @@ foliosModel.insertFolio = (foliosData, callback) => {
     }
 }
 
+foliosModel.insertEmpresa = (reqData, callback) => {
+    if (dbAdmin){
+        dbAdmin.query(`INSERT INTO empresa SET ? `, reqData, (error, rows) => {
+            if (error) {
+                console.log(error);
+            } else {                  
+                callback(null, rows);
+            }
+        });
+    }
+}
+
+foliosModel.insertAlmacen = (reqData, callback) => {
+    if (dbAdmin){
+        dbAdmin.query(`SELECT id_almacen FROM  almacen as a WHERE EXISTS (select * from  empresa as e WHERE a.id_empresa = `+reqData.id_empresa +` and a.id_almacen =`+reqData.id_almacen +`)`, (error, rows) => {
+            if (error) {
+                console.log(error);
+            } else {                  
+                row= rows;
+                if(row.length> 0){
+                    console.log(row) 
+                }else{
+                    
+                    dbAdmin.query(`INSERT INTO almacen SET ? `, reqData, (error, rows) =>{
+                        if (error) {
+                            console.log(error);
+                        } else { 
+                            console.log('Tupla afectada')                 
+                            callback(null, rows);
+                        }
+                    });
+                }
+            }
+        });
+       
+    }
+}
+/*SELECT id_pro   
+FROM  proveedor as p
+WHERE EXISTS (select * from  empresa as e WHERE p.id_empresa = 3 and p.id_pro = 3) ;*/
+foliosModel.insertProveedor = (reqData, callback) => {
+    if (dbAdmin){
+
+        dbAdmin.query(`SELECT id_pro FROM  proveedor as p 
+        WHERE EXISTS (select * from  empresa as e WHERE p.id_empresa = `+reqData.id_empresa +` and p.id_pro =`+reqData.id_pro +`)`, (error, rows) => {
+            if (error) {
+                console.log(error);
+            } else {                  
+                row= rows;
+                if(row.length> 0){
+                    console.log(row) 
+                }else{
+                    
+                    dbAdmin.query(`INSERT INTO proveedor SET ? `, reqData, (error, rows) => {
+                        if (error) {
+                            console.log(error);
+                        } else { 
+                            console.log('Tupla afectada')                 
+                            callback(null, rows);
+                        }
+                    });
+                }
+            }
+        });
+}
+}
+
 foliosModel.insertDetalles = (reqData, callback) => {
     if (dbAdmin){
         let row;
@@ -86,11 +169,26 @@ foliosModel.insertarticulo = (reqData, callback) => {
     if (dbAdmin){
         let row;
         for(let item of reqData) {
-            dbAdmin.query(`INSERT INTO articulos SET ? `, item, (error, rows) => {
+            dbAdmin.query(`SELECT id_articulo FROM  articulos as a
+                WHERE EXISTS (select * from  empresa as e WHERE a.id_empresa =`+item.id_empresa+` and a.id_articulo =`+item.id_articulo+`)`, (error, rows) => {
                 if (error) {
                     console.log(error);
                 } else {                  
                     row= rows;
+                    if(row.length> 0){
+                        console.log(row) 
+                    }else{
+                        item.pendiente = parseFloat(item.cantidad) - parseFloat(item.recibido);
+                        item.pendiente =  item.pendiente.toFixed(2);
+                        dbAdmin.query(`INSERT INTO articulos SET ? `, item, (error, rows) => {
+                            if (error) {
+                                console.log(error);
+                            } else {                  
+                                row= rows;
+                                console.log("Tabla afectada");
+                            }
+                        });
+                    }
                 }
             });
         }

@@ -36,6 +36,23 @@ app.get('/detalles/:id', (req, res) => {
     });
 });
 
+app.get('/almacen/:id', (req, res) => {
+    var id = req.params.id;
+    folio.getAlmacen(id, (err, data) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Ocurrió un error al obtener los datos"
+            });
+        } else{
+            res.json({
+                success: true,
+                data: data
+            });
+        }
+    });
+});
+
 app.put('/comentario', (req, res) => {
     console.log(req.body);
     const Data = {
@@ -65,12 +82,30 @@ app.post('/insert', (req, res) => {
         fecha_oc: req.body.fecha_oc,
         id_provedor: req.body.id_provedor,
         id_almacen: req.body.id_almacen,
-        id_detalles: req.body.id_detalles,
+        id_detalles: req.body.folio_oc,
         id_empresa: req.body.id_empresa,
         usuario: req.body.usuario,
         comentario_in: req.body.comentario_in,
         estatus: 1
     };
+    
+    const almacenData = {
+        id_almacen: req.body.id_almacen,
+        nombre: req.body.almacen,
+        id_empresa: req.body.id_empresa,
+    };
+
+    const empresaData = {
+        id_empresa: req.body.id_empresa,
+        nombre: req.body.empresa
+    };
+
+    const provData = {
+        id_pro: req.body.id_provedor,
+        nombre: req.body.proveedor,
+        id_empresa: req.body.id_empresa,
+    };
+
     folio.insertFolio(folioData, (err, data) => {
         if (err){
             res.json({
@@ -78,6 +113,12 @@ app.post('/insert', (req, res) => {
                 message: err
             });
         }else{
+            folio.insertEmpresa(empresaData, (err, data) => {
+            });
+            folio.insertAlmacen(almacenData, (err, data) => {
+            });
+            folio.insertProveedor(provData, (err, data) => {
+            });
             res.json({
                 success: true,
                 message: "¡Registro exitoso!"
@@ -85,6 +126,7 @@ app.post('/insert', (req, res) => {
         }
     });
 });
+
 
 app.post('/insertDetalles', (req, res) => {
     const reqdata = req.body;
@@ -119,6 +161,4 @@ app.post('/insertArticulo', (req, res) => {
         }
     });
 });
-
-
 }
