@@ -54,7 +54,6 @@ app.get('/almacen/:id', (req, res) => {
 });
 
 app.put('/comentario', (req, res) => {
-    console.log(req.body);
     const Data = {
         comentario : req.body.comentario,
         folio_previo : req.body.folio_previo,
