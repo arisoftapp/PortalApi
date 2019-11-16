@@ -3,7 +3,7 @@ let dbAdmin = require('../dbAdmin');
 let foliosModel = {};
 
 foliosModel.getFolios = (callback) => {
-    //console.log(idEmpresa);
+    
     if (dbAdmin) {
         dbAdmin.query(`select f.*, a.nombre as almacen , p.nombre as proveedor, e.nombre as empresa from folios as f 
         LEFT JOIN almacen as a on f.id_almacen = a.id_almacen
@@ -20,7 +20,7 @@ foliosModel.getFolios = (callback) => {
 };
 
 foliosModel.getDetalles = (id, callback) => {
-    //console.log(idEmpresa);
+   
     if (dbAdmin) {
         dbAdmin.query(`select d.*, a.articulo from detalles_folio as d
         LEFT JOIN articulos as a on d.id_articulo = a.id_articulo and d.id_empresa = a.id_empresa
@@ -36,7 +36,7 @@ foliosModel.getDetalles = (id, callback) => {
 };
 
 foliosModel.getAlmacen = (id, callback) => {
-    //console.log(idEmpresa);
+    
     if (dbAdmin) {
         dbAdmin.query(`select * from almacen where id_empresa =`+`'`+id+`'`, function(err, rows) {
             if (err) {
@@ -52,7 +52,7 @@ foliosModel.getAlmacen = (id, callback) => {
 
 
 foliosModel.updateComentario = (data, callback) =>{
-    console.log(data)
+  
     if (dbAdmin){
         const sql = `UPDATE folios SET 
                 comentario = '${data.comentario}',
@@ -101,9 +101,7 @@ foliosModel.insertAlmacen = (reqData, callback) => {
             } else {                  
                 row= rows;
                 if(row.length> 0){
-                    console.log(row) 
                 }else{
-                    
                     dbAdmin.query(`INSERT INTO almacen SET ? `, reqData, (error, rows) =>{
                         if (error) {
                             console.log(error);
@@ -131,7 +129,6 @@ foliosModel.insertProveedor = (reqData, callback) => {
             } else {                  
                 row= rows;
                 if(row.length> 0){
-                    console.log(row) 
                 }else{
                     
                     dbAdmin.query(`INSERT INTO proveedor SET ? `, reqData, (error, rows) => {
@@ -175,8 +172,7 @@ foliosModel.insertarticulo = (reqData, callback) => {
                     console.log(error);
                 } else {                  
                     row= rows;
-                    if(row.length> 0){
-                        console.log(row) 
+                    if(row.length> 0){  
                     }else{
                         item.pendiente = parseFloat(item.cantidad) - parseFloat(item.recibido);
                         item.pendiente =  item.pendiente.toFixed(2);
